@@ -45,7 +45,10 @@ public class DrawingView extends View {
 
     @Override
     public void onDraw(Canvas canvas){
+        super.onDraw(canvas);
+
         if (model != null){
+            System.out.println("aled26");
             model.draw(canvas);
         }
     }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import fr.dut2.andrawid.model.DrawableShape;
 import fr.dut2.andrawid.model.LineShape;
 import fr.dut2.andrawid.model.ShapeContainer;
 import fr.dut2.andrawid.model.ShapeProperties;
@@ -22,11 +21,10 @@ public class DrawingActivity extends AppCompatActivity {
         sc.add(ls, new ShapeProperties(10.0f, 30.0f));
         dv.setModel(sc);
 
-
         // listener to move the line
         dv.setOnClickListener( v -> {
-            System.out.println("aled");
             sc.add(ls, new ShapeProperties(20.0f, 40.0f));
+            dv.invalidate();
         });
     }
 }

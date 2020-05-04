@@ -8,4 +8,7 @@ public class ShapeProperties {
         this.origin = origin;
     }
 
+    public float[] getOrigin() {
+        return origin;
+    }
 }
