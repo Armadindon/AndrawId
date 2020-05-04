@@ -2,7 +2,7 @@ package fr.dut2.andrawid.model;
 
 import android.graphics.Canvas;
 
-public class LineShape {
+public class LineShape implements DrawableShape {
     private float[] points;
 
     public LineShape(float[] points){
@@ -10,7 +10,8 @@ public class LineShape {
         this.points = points;
     }
 
+    @Override
+    public void drawShape(ShapeProperties properties, Canvas canvas) {
 
-
-
+    }
 }
