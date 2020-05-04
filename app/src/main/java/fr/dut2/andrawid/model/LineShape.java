@@ -1,6 +1,8 @@
 package fr.dut2.andrawid.model;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 public class LineShape implements DrawableShape {
     private float[] points;
@@ -12,6 +14,8 @@ public class LineShape implements DrawableShape {
 
     @Override
     public void drawShape(ShapeProperties properties, Canvas canvas) {
-
+        Paint blackPaint = new Paint();
+        blackPaint.setColor(Color.WHITE);
+        canvas.drawLine(points[0], points[1], points[2], points[3], blackPaint);
     }
 }
