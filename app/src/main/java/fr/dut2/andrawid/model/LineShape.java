@@ -18,6 +18,6 @@ public class LineShape implements DrawableShape {
         blackPaint.setColor(Color.BLACK);
 
         float[] origin = properties.getOrigin();
-        canvas.drawLine(points[0] + origin[0], points[1], points[2] + origin[1], points[3], blackPaint);
+        canvas.drawLine(points[0] + origin[0], points[1] + origin[1], points[2], points[3], blackPaint);
     }
 }
