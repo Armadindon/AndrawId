@@ -18,7 +18,7 @@ public class DrawingActivity extends AppCompatActivity {
 
         DrawingView dv = findViewById(R.id.drawingView);
         final ShapeContainer sc = new ShapeContainer();
-        final LineShape ls = new LineShape(new float[]{0.0f, 0.0f, 150.0f, 150.0f});
+        final LineShape ls = new LineShape(0.0f, 0.0f, 150.0f, 150.0f);
         sc.add(ls, new ShapeProperties(10.0f, 30.0f));
         dv.setModel(sc);
 

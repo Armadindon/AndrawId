@@ -7,7 +7,7 @@ import android.graphics.Paint;
 public class LineShape implements DrawableShape {
     private float[] points;
 
-    public LineShape(float[] points){
+    public LineShape(float... points){
         if(points.length != 4) throw new IllegalArgumentException("You need to pass 4 floating numbers");
         this.points = points;
     }
@@ -16,6 +16,7 @@ public class LineShape implements DrawableShape {
     public void drawShape(ShapeProperties properties, Canvas canvas) {
         Paint blackPaint = new Paint();
         blackPaint.setColor(Color.BLACK);
+        blackPaint.setStrokeWidth(3f);
 
         float[] origin = properties.getOrigin();
         canvas.drawLine(points[0] + origin[0], points[1] + origin[1], points[2], points[3], blackPaint);
