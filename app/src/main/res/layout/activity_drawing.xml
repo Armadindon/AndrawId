@@ -6,23 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".DrawingActivity">
 
-    <ListView
-        android:id="@+id/lvPalette"
-        android:layout_width="71dp"
-        android:layout_height="match_parent"
+    <fr.dut2.andrawid.view.DrawingView
+        android:id="@+id/drawingView"
+        android:layout_width="0dp"
+        android:layout_height="722dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/gvPalette"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <GridView
+        android:id="@+id/gvPalette"
+        android:layout_width="204dp"
+        android:layout_height="704dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <fr.dut2.andrawid.view.DrawingView
-        android:id="@+id/drawingView"
-        android:layout_width="340dp"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/lvPalette"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
