@@ -11,23 +11,24 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import fr.dut2.andrawid.model.CursiveShape;
+import fr.dut2.andrawid.model.DrawableShape;
 import fr.dut2.andrawid.model.LineShape;
+import fr.dut2.andrawid.model.RectangleShape;
 import fr.dut2.andrawid.model.ShapeContainer;
 import fr.dut2.andrawid.model.ShapeContainerChangeListener;
+import fr.dut2.andrawid.model.ShapeKind;
 import fr.dut2.andrawid.model.ShapeProperties;
 
 public class DrawingView extends View {
 
     private ShapeContainer model;
+    private ShapeKind selected = ShapeKind.CURSIVE;
 
-    private float down_x;
-    private float down_y;
-
-    private float up_x;
-    private float up_y;
-
+    private float[] points;
 
 
     public DrawingView(Context context) {
@@ -73,14 +74,20 @@ public class DrawingView extends View {
 
 
     // Cette série de setter est simplement utile pour le debugging
-    private void setActionDown(MotionEvent event){
-        this.down_x = event.getX();
-        this.down_y = event.getY();
+
+
+    public void setPoints(float[] points) {
+        this.points = points;
     }
 
-    private void setActionUp(MotionEvent event){
-        this.up_x = event.getX();
-        this.up_y = event.getY();
+    public void addpoint(float x, float y){
+        points = Arrays.copyOf(points, points.length + 2);
+        points[points.length-1] = y;
+        points[points.length-2] = x;
+    }
+
+    public float[] getPoints() {
+        return points;
     }
 
     @Override
@@ -89,13 +96,34 @@ public class DrawingView extends View {
 
         System.out.println(event);
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN){ setActionDown(event); }
+        if (event.getAction() == MotionEvent.ACTION_DOWN){
+            setPoints(new float[]{event.getX(), event.getY()});
+        }
+        if(event.getAction() == MotionEvent.ACTION_MOVE){
+            if(selected == ShapeKind.CURSIVE){
+                addpoint(event.getX(),event.getY());
+                addpoint(event.getX(),event.getY());
+            }
+        }
         if (event.getAction() == MotionEvent.ACTION_UP){
-            setActionUp(event);
+            addpoint(event.getX(),event.getY());
+            DrawableShape shape = null;
 
-            LineShape line = new LineShape(down_x, down_y, up_x, up_y);
-            System.out.println(down_x + ", " + down_y + " :: " +  up_x + ", " +  up_y);
-            model.add(line, new ShapeProperties(0.0f, 0.0f));
+            switch (selected){
+                case SEGMENT:
+                    shape = new LineShape(points[0], points[1], points[2], points[3]);
+                    break;
+
+                case RECTANGLE:
+                    shape = new RectangleShape(points[0], points[1], points[2], points[3]);
+                    break;
+
+                case CURSIVE:
+                    shape = new CursiveShape(points);
+                    break;
+
+            }
+            model.add(shape, new ShapeProperties(0.0f, 0.0f));
 
             model.fireListeners();
         }
