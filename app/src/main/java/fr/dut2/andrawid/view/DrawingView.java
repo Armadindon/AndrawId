@@ -2,6 +2,7 @@ package fr.dut2.andrawid.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.drawable.shapes.Shape;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -57,6 +58,10 @@ public class DrawingView extends View {
         this.model.addChangeListener(listener);
 
         this.invalidate();
+    }
+
+    public void setShapeKind(ShapeKind shapeKind){
+        this.selected = shapeKind;
     }
 
     @Override

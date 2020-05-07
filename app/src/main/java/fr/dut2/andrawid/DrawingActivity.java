@@ -38,7 +38,7 @@ public class DrawingActivity extends AppCompatActivity {
 
 
         lv.setOnItemClickListener((adapterView, view, i, l) -> {
-            // selectedShapeKind = adapterView.getItemAtPosition(i);
+            dv.setShapeKind((ShapeKind) adapterView.getItemAtPosition(i));
         });
 
     }
