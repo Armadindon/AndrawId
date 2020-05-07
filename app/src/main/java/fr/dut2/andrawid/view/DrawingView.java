@@ -18,6 +18,7 @@ import fr.dut2.andrawid.model.CursiveShape;
 import fr.dut2.andrawid.model.DrawableShape;
 import fr.dut2.andrawid.model.LineShape;
 import fr.dut2.andrawid.model.RectangleShape;
+import fr.dut2.andrawid.model.ShapeBuilder;
 import fr.dut2.andrawid.model.ShapeContainer;
 import fr.dut2.andrawid.model.ShapeContainerChangeListener;
 import fr.dut2.andrawid.model.ShapeKind;
@@ -107,23 +108,10 @@ public class DrawingView extends View {
         }
         if (event.getAction() == MotionEvent.ACTION_UP){
             addpoint(event.getX(),event.getY());
-            DrawableShape shape = null;
+            ShapeBuilder sB = new ShapeBuilder();
+            sB.setShapeKind(selected);
 
-            switch (selected){
-                case SEGMENT:
-                    shape = new LineShape(points[0], points[1], points[2], points[3]);
-                    break;
-
-                case RECTANGLE:
-                    shape = new RectangleShape(points[0], points[1], points[2], points[3]);
-                    break;
-
-                case CURSIVE:
-                    shape = new CursiveShape(points);
-                    break;
-
-            }
-            model.add(shape, new ShapeProperties(0.0f, 0.0f));
+            model.add(sB.build(getPoints()), new ShapeProperties(0.0f, 0.0f));
 
             model.fireListeners();
         }

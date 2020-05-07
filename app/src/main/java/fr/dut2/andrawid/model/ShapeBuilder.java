@@ -19,6 +19,22 @@ public class ShapeBuilder {
      *               some shape kinds (like CURSIVE) may admit intermediate points in the array
      */
     public DrawableShape build(float... coords){
-        return null;
+        DrawableShape buildShape = null;
+
+        switch (shape){
+            case SEGMENT:
+                buildShape = new LineShape(coords);
+                break;
+
+            case RECTANGLE:
+                buildShape = new RectangleShape(coords);
+                break;
+
+            case CURSIVE:
+                buildShape = new CursiveShape(coords);
+                break;
+
+        }
+        return buildShape;
     }
 }
