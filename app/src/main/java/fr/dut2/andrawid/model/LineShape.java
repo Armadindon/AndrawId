@@ -15,14 +15,17 @@ public class LineShape implements DrawableShape {
     @Override
     public void drawShape(ShapeProperties properties, Canvas canvas) {
         Paint blackPaint = new Paint();
-        blackPaint.setColor(Color.BLACK);
+        blackPaint.setColor(properties.getColor());
         blackPaint.setStrokeWidth(3f);
-
-        System.out.println("Line");
-
 
         float[] origin = properties.getOrigin();
         canvas.drawLine(points[0] + origin[0], points[1] + origin[1], points[2]+ origin[0], points[3] + origin[1], blackPaint);
+    }
+
+
+    @Override
+    public float[] getCenter() {
+        return new float[]{(points[0]+points[2])/2,(points[1]+points[3])/2};
     }
 
 }

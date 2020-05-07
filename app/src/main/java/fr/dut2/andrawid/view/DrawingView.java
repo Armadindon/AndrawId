@@ -2,8 +2,9 @@ package fr.dut2.andrawid.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.drawable.shapes.Shape;
+import android.graphics.Color;
 import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,14 +12,9 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import fr.dut2.andrawid.model.CursiveShape;
 import fr.dut2.andrawid.model.DrawableShape;
-import fr.dut2.andrawid.model.LineShape;
-import fr.dut2.andrawid.model.RectangleShape;
 import fr.dut2.andrawid.model.ShapeBuilder;
 import fr.dut2.andrawid.model.ShapeContainer;
 import fr.dut2.andrawid.model.ShapeContainerChangeListener;
@@ -27,11 +23,15 @@ import fr.dut2.andrawid.model.ShapeProperties;
 
 public class DrawingView extends View {
 
+    private static final int MAX_MOVE = 50;
+
     private ShapeContainer model;
     private ShapeKind selected = ShapeKind.CURSIVE;
 
     private float[] points;
-
+    private float[] eventStartPosition;
+    private Handler selectHandler = new Handler();
+    private Runnable selectionRunnable;
 
     public DrawingView(Context context) {
         super(context);
@@ -104,14 +104,35 @@ public class DrawingView extends View {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN){
             setPoints(new float[]{event.getX(), event.getY()});
+            if(model.getSelectShape() == null){
+                eventStartPosition = new float[]{event.getX(), event.getY()};
+                selectionRunnable = ()->{
+                    System.out.println("Pop");
+                    System.out.println(model.getShapeFromCenter(eventStartPosition[0],eventStartPosition[1]));
+                    model.setSelectShape(model.getShapeFromCenter(eventStartPosition[0],eventStartPosition[1]));
+                };
+                selectHandler.postDelayed(selectionRunnable,1000);
+            }else{
+                //on déplace la forme
+                DrawableShape tempShape = model.getSelectShape();
+                model.setSelectShape(null);
+                model.add(tempShape,new ShapeProperties(Color.BLACK,event.getX(),event.getY()));
+            }
         }
         if(event.getAction() == MotionEvent.ACTION_MOVE){
             if(selected == ShapeKind.CURSIVE){
                 addpoint(event.getX(),event.getY());
                 addpoint(event.getX(),event.getY());
             }
+            if ((event.getX() > eventStartPosition[0] + MAX_MOVE || event.getX() < eventStartPosition[0] - MAX_MOVE) ||
+                    (event.getY() > eventStartPosition[1] + MAX_MOVE || event.getY() < eventStartPosition[1] - MAX_MOVE)){
+                selectHandler.removeCallbacks(selectionRunnable);
+            }
         }
         if (event.getAction() == MotionEvent.ACTION_UP){
+            //si il reste un handler, on le vire
+            selectHandler.removeCallbacks(selectionRunnable);
+
             addpoint(event.getX(),event.getY());
             ShapeBuilder sB = new ShapeBuilder();
             sB.setShapeKind(selected);
