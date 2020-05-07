@@ -21,4 +21,5 @@ public class LineShape implements DrawableShape {
         float[] origin = properties.getOrigin();
         canvas.drawLine(points[0] + origin[0], points[1] + origin[1], points[2], points[3], blackPaint);
     }
+
 }

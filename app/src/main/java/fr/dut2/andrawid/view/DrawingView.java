@@ -97,6 +97,7 @@ public class DrawingView extends View {
             System.out.println(down_x + ", " + down_y + " :: " +  up_x + ", " +  up_y);
             model.add(line, new ShapeProperties(0.0f, 0.0f));
 
+            model.fireListeners();
         }
 
 

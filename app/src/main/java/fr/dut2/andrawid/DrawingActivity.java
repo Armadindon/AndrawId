@@ -25,7 +25,6 @@ public class DrawingActivity extends AppCompatActivity {
         // listener to move the line
         dv.setOnClickListener( v -> {
             sc.add(ls, new ShapeProperties(20.0f, 40.0f));
-            dv.invalidate();
         });
     }
 }
