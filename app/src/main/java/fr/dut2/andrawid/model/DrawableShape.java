@@ -4,6 +4,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 
 public interface DrawableShape {
-    public void drawShape(ShapeProperties properties, Canvas canvas);
-    public float[] getCenter();
+    void drawShape(ShapeProperties properties, Canvas canvas);
+
+    float[] getCenter();
+
+    float[] getPoints();
+
+    ShapeKind getShapeKind();
 }

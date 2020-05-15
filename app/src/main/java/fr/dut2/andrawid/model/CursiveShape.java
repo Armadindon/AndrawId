@@ -6,11 +6,11 @@ import android.graphics.Paint;
 
 import java.util.ArrayList;
 
-public class CursiveShape implements DrawableShape {
-    private float[] points;
+public class CursiveShape extends AbstractDrawableShape {
+
 
     public CursiveShape(float... points){
-        this.points = points;
+        super(points);
     }
 
     @Override
@@ -23,6 +23,10 @@ public class CursiveShape implements DrawableShape {
         canvas.drawLines(points, blackPaint);
     }
 
+    @Override
+    public ShapeKind getShapeKind() {
+        return ShapeKind.CURSIVE;
+    }
 
     @Override
     public float[] getCenter() {

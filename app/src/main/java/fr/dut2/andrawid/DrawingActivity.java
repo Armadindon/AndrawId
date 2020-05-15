@@ -1,25 +1,21 @@
 package fr.dut2.andrawid;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.os.Bundle;
+import android.widget.GridView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.ListView;
+import org.json.JSONException;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
+import fr.dut2.andrawid.model.ExportDrawings;
 import fr.dut2.andrawid.model.LineShape;
 import fr.dut2.andrawid.model.ShapeContainer;
-import fr.dut2.andrawid.model.ShapeKind;
 import fr.dut2.andrawid.model.ShapeProperties;
 import fr.dut2.andrawid.view.DrawingView;
 import fr.dut2.andrawid.view.GridViewImageAdapter;
-import android.widget.AdapterView;
 
 public class DrawingActivity extends AppCompatActivity {
 
@@ -28,8 +24,9 @@ public class DrawingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing);
 
-        DrawingView dv = (DrawingView) findViewById(R.id.drawingView);
-        GridView gv = (GridView) findViewById(R.id.gvPalette);
+        ExportDrawings exportDrawings = new ExportDrawings();
+        DrawingView dv =  findViewById(R.id.drawingView);
+        GridView gv = findViewById(R.id.gvPalette);
         GridViewImageAdapter gvImg = new GridViewImageAdapter(this, dv);
         gv.setAdapter(gvImg);
 
@@ -39,9 +36,14 @@ public class DrawingActivity extends AppCompatActivity {
         dv.setModel(sc);
 
 
+
         // listener to move the line
         dv.setOnClickListener(v -> {
-            sc.add(ls, new ShapeProperties(20.0f, 40.0f));
+            try {
+                exportDrawings.save(sc, null);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         });
 
         gv.setOnItemClickListener((parent, v, position, id) -> {

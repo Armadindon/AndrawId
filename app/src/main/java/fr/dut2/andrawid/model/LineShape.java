@@ -4,12 +4,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-public class LineShape implements DrawableShape {
-    private float[] points;
+public class LineShape extends AbstractDrawableShape {
 
     public LineShape(float... points){
-        if(points.length != 4) throw new IllegalArgumentException("You need to pass 4 floating numbers");
-        this.points = points;
+        super(points);
     }
 
     @Override
@@ -22,6 +20,10 @@ public class LineShape implements DrawableShape {
         canvas.drawLine(points[0] + origin[0], points[1] + origin[1], points[2]+ origin[0], points[3] + origin[1], blackPaint);
     }
 
+    @Override
+    public ShapeKind getShapeKind() {
+        return ShapeKind.SEGMENT;
+    }
 
     @Override
     public float[] getCenter() {

@@ -15,44 +15,49 @@ public class ShapeContainer {
 
     private static final int CENTER_PRECISION = 50; //pixel autour du centre pour la séléction et la suppresion
 
-    private HashMap<DrawableShape,ShapeProperties> container;
+    private HashMap<DrawableShape, ShapeProperties> container;
     private ArrayList<ShapeContainerChangeListener> changeListeners = new ArrayList<>();
 
-    private DrawableShape selectShape =null;
+    private DrawableShape selectShape = null;
 
-    public ShapeContainer(){
+    public ShapeContainer() {
         container = new HashMap<>();
     }
 
-    public void draw(Canvas canvas){
-        for(DrawableShape dS : container.keySet()){
-            dS.drawShape(container.get(dS),canvas);
+    public void draw(Canvas canvas) {
+        for (DrawableShape dS : container.keySet()) {
+            dS.drawShape(container.get(dS), canvas);
         }
     }
 
-    public boolean add(DrawableShape shape, ShapeProperties properties){
-        return container.put(shape,properties) == null;
+    public HashMap<DrawableShape, ShapeProperties> getContainer(){
+        return this.container;
     }
 
-    public void addChangeListener(ShapeContainerChangeListener listener){
+    public boolean add(DrawableShape shape, ShapeProperties properties) {
+        return container.put(shape, properties) == null;
+    }
+
+    public void addChangeListener(ShapeContainerChangeListener listener) {
         changeListeners.add(listener);
     }
 
-    public void removeChangeListener(ShapeContainerChangeListener listener){
+    public void removeChangeListener(ShapeContainerChangeListener listener) {
         changeListeners.remove(listener);
     }
 
-    public void fireListeners(){
-        for (ShapeContainerChangeListener listener: changeListeners){
+    public void fireListeners() {
+        for (ShapeContainerChangeListener listener : changeListeners) {
             listener.onShapeContainerChange();
         }
     }
 
     public void setSelectShape(DrawableShape selectShape) {
 
-        if(this.selectShape != null) add(this.selectShape,new ShapeProperties(Color.BLACK,0.0f, 0.0f));
+        if (this.selectShape != null)
+            add(this.selectShape, new ShapeProperties(Color.BLACK, 0.0f, 0.0f));
         this.selectShape = selectShape;
-        if(selectShape != null)add(selectShape,new ShapeProperties(Color.BLUE,0.0f, 0.0f));
+        if (selectShape != null) add(selectShape, new ShapeProperties(Color.BLUE, 0.0f, 0.0f));
 
     }
 
@@ -71,14 +76,14 @@ public class ShapeContainer {
                 toRemove.add(shape);
         }
         set.removeAll(toRemove);
-        if(set.size() == 0) return null;
+        if (set.size() == 0) return null;
         float minDistance = Float.MAX_VALUE;
         DrawableShape minShape = null;
         //On cherche la forme la plus proche
         for (DrawableShape shape : set) {
             float[] center = shape.getCenter();
-            float distance = (float) Math.sqrt(Math.pow((center[0]-x),2)+Math.pow((center[1]-y),2));
-            if(distance < minDistance){
+            float distance = (float) Math.sqrt(Math.pow((center[0] - x), 2) + Math.pow((center[1] - y), 2));
+            if (distance < minDistance) {
                 minDistance = distance;
                 minShape = shape;
             }
