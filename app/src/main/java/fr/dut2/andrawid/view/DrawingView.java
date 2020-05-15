@@ -26,7 +26,7 @@ public class DrawingView extends View {
     private static final int MAX_MOVE = 50;
 
     private ShapeContainer model;
-    private ShapeKind selected = ShapeKind.CURSIVE;
+    private ShapeKind selected = ShapeKind.SEGMENT;
 
     private float[] points;
     private float[] eventStartPosition;
@@ -120,10 +120,11 @@ public class DrawingView extends View {
             }
         }
         if(event.getAction() == MotionEvent.ACTION_MOVE){
-            if(selected == ShapeKind.CURSIVE){
-                addpoint(event.getX(),event.getY());
-                addpoint(event.getX(),event.getY());
+            if(selected == ShapeKind.CURSIVE) {
+                addpoint(event.getX(), event.getY());
+                addpoint(event.getX(), event.getY());
             }
+
             if ((event.getX() > eventStartPosition[0] + MAX_MOVE || event.getX() < eventStartPosition[0] - MAX_MOVE) ||
                     (event.getY() > eventStartPosition[1] + MAX_MOVE || event.getY() < eventStartPosition[1] - MAX_MOVE)){
                 selectHandler.removeCallbacks(selectionRunnable);
