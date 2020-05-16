@@ -1,7 +1,13 @@
 package fr.dut2.andrawid.model;
 
+import android.graphics.drawable.shapes.Shape;
+
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -9,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.*;
+
+import fr.dut2.andrawid.Utils;
 
 public class ExportDrawings implements DrawingIO {
     @Override
@@ -41,7 +49,32 @@ public class ExportDrawings implements DrawingIO {
     }
 
     @Override
-    public ShapeContainer load(InputStream input) {
-        return null;
+    public ShapeContainer load(InputStream input) throws IOException, JSONException {
+        ShapeContainer shapeContainer = new ShapeContainer();
+        ShapeBuilder shapeBuilder = new ShapeBuilder();
+
+        BufferedReader streamReader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
+        StringBuilder responseStrBuilder = new StringBuilder();
+
+        String inputStr;
+        while ((inputStr = streamReader.readLine()) != null)
+            responseStrBuilder.append(inputStr);
+
+        JSONObject jsonObject = new JSONObject(responseStrBuilder.toString());
+
+        JSONArray jsonArray = jsonObject.getJSONArray("content");
+
+        for(int i = 0; i< jsonArray.length(); i++){
+            JSONObject shape = (JSONObject) jsonArray.get(i);
+
+            float[] points = Utils.convertStringToFloatArray(shape.getString("points"));
+            float[] origin = Utils.convertStringToFloatArray(shape.getString("origin"));
+            ShapeKind shapeKind = ShapeKind.valueOf(shape.getString("shapeKind"));
+
+            shapeBuilder.setShapeKind(shapeKind);
+            shapeContainer.add(shapeBuilder.build(points), new ShapeProperties(origin));
+        }
+        
+        return shapeContainer;
     }
 }
