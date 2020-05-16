@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public interface DrawingIO {
-    void save(ShapeContainer container, OutputStream output) throws JSONException;
+    void save(ShapeContainer container, OutputStream output);
 
-    ShapeContainer load(InputStream input) throws IOException, JSONException;
+    ShapeContainer load(InputStream input) throws IOException;
 }

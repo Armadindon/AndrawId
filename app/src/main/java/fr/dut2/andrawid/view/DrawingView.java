@@ -15,7 +15,6 @@ import androidx.annotation.RequiresApi;
 import java.util.Arrays;
 
 import fr.dut2.andrawid.model.DrawableShape;
-import fr.dut2.andrawid.model.ExportDrawings;
 import fr.dut2.andrawid.model.ShapeBuilder;
 import fr.dut2.andrawid.model.ShapeContainer;
 import fr.dut2.andrawid.model.ShapeContainerChangeListener;

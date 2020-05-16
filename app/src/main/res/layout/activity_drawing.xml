@@ -8,8 +8,8 @@
 
     <fr.dut2.andrawid.view.DrawingView
         android:id="@+id/drawingView"
-        android:layout_width="413dp"
-        android:layout_height="574dp"
+        android:layout_width="414dp"
+        android:layout_height="577dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Arrays;
 
-import fr.dut2.andrawid.model.ExportDrawings;
+import fr.dut2.andrawid.model.share.ExportDrawings;
 import fr.dut2.andrawid.model.LineShape;
 import fr.dut2.andrawid.model.ShapeContainer;
 import fr.dut2.andrawid.model.ShapeProperties;
@@ -40,11 +38,7 @@ public class DrawingActivity extends AppCompatActivity {
 
         // listener to move the line
         dv.setOnClickListener(v -> {
-            try {
-                exportDrawings.save(sc, null);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            exportDrawings.save(sc, null);
         });
 
         gv.setOnItemClickListener((parent, v, position, id) -> {
