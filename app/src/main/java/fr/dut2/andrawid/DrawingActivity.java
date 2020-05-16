@@ -30,11 +30,9 @@ public class DrawingActivity extends AppCompatActivity {
         gv.setAdapter(gvImg);
 
         final ShapeContainer sc = new ShapeContainer();
-        final LineShape ls = new LineShape(0.0f, 0.0f, 150.0f, 150.0f);
-        sc.add(ls, new ShapeProperties(10.0f, 30.0f));
+        //final LineShape ls = new LineShape(0.0f, 0.0f, 150.0f, 150.0f);
+        //sc.add(ls, new ShapeProperties(10.0f, 30.0f));
         dv.setModel(sc);
-
-        System.out.println(Arrays.toString(Utils.convertStringToFloatArray("[0.0, 145.45, 112.7, 741.54")));
 
         // listener to move the line
         dv.setOnClickListener(v -> {

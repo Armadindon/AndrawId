@@ -54,7 +54,7 @@ public class ExportDrawings implements DrawingIO {
             jsonObject.put("content", content);
 
 
-            System.out.println(jsonObject.toString());
+            //System.out.println(jsonObject.toString());
         } catch (JSONException e) {
             Log.e("JSONException", e.getMessage());
         }

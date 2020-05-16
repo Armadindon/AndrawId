@@ -26,8 +26,8 @@ public class LineShape extends AbstractDrawableShape {
     }
 
     @Override
-    public float[] getCenter() {
-        return new float[]{(points[0]+points[2])/2,(points[1]+points[3])/2};
+    public float[] getCenter(float[] origin) {
+        return new float[]{((points[0]+origin[0])+(points[2]+origin[0]))/2,((points[1]+origin[1])+(points[3]+origin[1]))/2};
     }
 
 }

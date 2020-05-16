@@ -38,6 +38,13 @@ public class ShapeContainer {
         return container.put(shape, properties) == null;
     }
 
+    public boolean remove(DrawableShape shape) {
+        System.out.println(container.keySet());
+        ShapeProperties deletedShape = container.remove(shape);
+        System.out.println(container.keySet());
+        return shape != null;
+    }
+
     public void addChangeListener(ShapeContainerChangeListener listener) {
         changeListeners.add(listener);
     }
@@ -54,10 +61,9 @@ public class ShapeContainer {
 
     public void setSelectShape(DrawableShape selectShape) {
 
-        if (this.selectShape != null)
-            add(this.selectShape, new ShapeProperties(Color.BLACK, 0.0f, 0.0f));
+        if (this.selectShape != null) add(this.selectShape, new ShapeProperties(Color.BLACK, container.get(this.selectShape).getOrigin()));
         this.selectShape = selectShape;
-        if (selectShape != null) add(selectShape, new ShapeProperties(Color.BLUE, 0.0f, 0.0f));
+        if (selectShape != null) add(selectShape, new ShapeProperties(Color.BLUE, container.get(this.selectShape).getOrigin()));
 
     }
 
@@ -71,7 +77,7 @@ public class ShapeContainer {
 
         //On enlève les formes qui sont trop éloignés du point
         for (DrawableShape shape : set) {
-            float[] center = shape.getCenter();
+            float[] center = shape.getCenter(container.get(shape).getOrigin());
             if (!(x > center[0] - CENTER_PRECISION && x < center[0] + CENTER_PRECISION) || !(y > center[1] - CENTER_PRECISION && y < center[1] + CENTER_PRECISION))
                 toRemove.add(shape);
         }
@@ -81,7 +87,7 @@ public class ShapeContainer {
         DrawableShape minShape = null;
         //On cherche la forme la plus proche
         for (DrawableShape shape : set) {
-            float[] center = shape.getCenter();
+            float[] center = shape.getCenter(container.get(shape).getOrigin());
             float distance = (float) Math.sqrt(Math.pow((center[0] - x), 2) + Math.pow((center[1] - y), 2));
             if (distance < minDistance) {
                 minDistance = distance;
