@@ -70,6 +70,10 @@ public class DrawingView extends View {
         this.invalidate();
     }
 
+    public ShapeContainer getModel() {
+        return model;
+    }
+
     public void setShapeKind(ShapeKind shapeKind){
         this.selected = shapeKind;
     }

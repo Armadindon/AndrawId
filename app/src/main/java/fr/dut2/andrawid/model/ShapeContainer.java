@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ShapeContainer {
-
     private static final int CENTER_PRECISION = 50; //pixel autour du centre pour la séléction et la suppresion
 
     private HashMap<DrawableShape, ShapeProperties> container;
