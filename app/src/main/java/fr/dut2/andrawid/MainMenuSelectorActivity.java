@@ -31,13 +31,14 @@ public class MainMenuSelectorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu_selector);
 
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},1);
+
         File docPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
         System.out.println("External Storage exist : "+docPath.exists());
         File appPath = new File(docPath, "andrawid");
-        System.out.println("Exixts 1 :"+appPath.exists());
         // the directory appPath may not exist yet, we can create it
-        System.out.println("Mkdir :"+appPath.mkdir());
-        System.out.println("Exixts 2 :"+appPath.exists());
+        appPath.mkdir();
+
 
         List<File> drawings = Arrays.asList(appPath.listFiles());
         ArrayAdapter<File> drawingsAdapter = new ArrayAdapter<File>(this,android.R.layout.simple_list_item_1,drawings);
@@ -59,7 +60,7 @@ public class MainMenuSelectorActivity extends AppCompatActivity {
             }
             System.out.println();
             Intent nextActivity = new Intent(this,DrawingActivity.class);
-            nextActivity.putExtra("file", new File(appPath,fileName.toString()+".json").getPath());
+            nextActivity.putExtra("file", new File(appPath,fileName.getText().toString()+".json").getPath());
             startActivity(nextActivity);
 
         });
