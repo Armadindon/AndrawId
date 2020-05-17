@@ -1,17 +1,19 @@
 package fr.dut2.andrawid.model.share;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.os.Environment;
 
 import org.json.JSONException;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import fr.dut2.andrawid.model.DrawingIO;
 import fr.dut2.andrawid.model.ShapeContainer;
-import fr.dut2.andrawid.view.DrawingView;
 
 public class DrawingBitmapExporter implements DrawingIO {
     @Override

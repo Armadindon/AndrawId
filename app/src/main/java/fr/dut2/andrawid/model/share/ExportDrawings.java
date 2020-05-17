@@ -1,21 +1,24 @@
 package fr.dut2.andrawid.model.share;
 
-import android.graphics.drawable.shapes.Shape;
 import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.json.*;
 
 import fr.dut2.andrawid.Utils;
 import fr.dut2.andrawid.model.DrawableShape;
@@ -29,9 +32,10 @@ public class ExportDrawings implements DrawingIO {
     @Override
     public void save(ShapeContainer shapeContainer, OutputStream output) {
         try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(output, "UTF-8");
+
             JSONObject jsonObject = new JSONObject();
             JSONArray content = new JSONArray();
-
 
             jsonObject.put("type", "drawings");
             jsonObject.put("formatVersion", "9.1");
@@ -53,9 +57,11 @@ public class ExportDrawings implements DrawingIO {
             }
             jsonObject.put("content", content);
 
+            outputStreamWriter.write(jsonObject.toString());
+            outputStreamWriter.flush();
+            outputStreamWriter.close();
 
-            //System.out.println(jsonObject.toString());
-        } catch (JSONException e) {
+        } catch (JSONException | IOException e) {
             Log.e("JSONException", e.getMessage());
         }
     }

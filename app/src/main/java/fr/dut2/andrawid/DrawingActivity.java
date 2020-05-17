@@ -1,25 +1,21 @@
 package fr.dut2.andrawid;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.GridView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import org.json.JSONException;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
+import java.io.OutputStream;
 
-import fr.dut2.andrawid.model.share.ExportDrawings;
-import fr.dut2.andrawid.model.LineShape;
 import fr.dut2.andrawid.model.ShapeContainer;
-import fr.dut2.andrawid.model.ShapeProperties;
+import fr.dut2.andrawid.model.share.ExportDrawings;
 import fr.dut2.andrawid.view.DrawingView;
 import fr.dut2.andrawid.view.GridViewImageAdapter;
 
@@ -45,6 +41,7 @@ public class DrawingActivity extends AppCompatActivity {
             }
         };
 
+
         actionsHandler = new Handler();
 
         actionsHandler.postDelayed(autoSaver,SAVE_INTERVAL);
@@ -66,7 +63,7 @@ public class DrawingActivity extends AppCompatActivity {
             }
         }else{ //On initialise le fichier
             try {
-                file.createNewFile();
+               file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -84,7 +81,7 @@ public class DrawingActivity extends AppCompatActivity {
         // listener to move the line
         ShapeContainer finalSc = sc;
         dv.setOnClickListener(v -> {
-            exportDrawings.save(finalSc, null);
+
         });
 
         gv.setOnItemClickListener((parent, v, position, id) -> {
