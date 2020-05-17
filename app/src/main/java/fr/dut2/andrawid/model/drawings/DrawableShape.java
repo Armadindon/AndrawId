@@ -1,7 +1,9 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.drawings;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
+
+import fr.dut2.andrawid.model.shape.ShapeKind;
+import fr.dut2.andrawid.model.shape.ShapeProperties;
 
 public interface DrawableShape {
     void drawShape(ShapeProperties properties, Canvas canvas);

@@ -1,4 +1,4 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.shape;
 
 import android.graphics.Color;
 
@@ -14,7 +14,7 @@ public class ShapeProperties {
     }
 
     public ShapeProperties(float... origin) {
-        this(Color.BLACK, origin);
+        this(Color.WHITE, origin);
     }
 
     public float[] getOrigin() {

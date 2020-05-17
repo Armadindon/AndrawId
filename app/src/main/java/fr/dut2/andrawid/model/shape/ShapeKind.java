@@ -1,4 +1,4 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.shape;
 
 import android.media.Image;
 import android.net.Uri;

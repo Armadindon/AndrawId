@@ -1,4 +1,4 @@
-package fr.dut2.andrawid.model.drawings;
+package fr.dut2.andrawid.model.share;
 
 import android.util.Log;
 
@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.dut2.andrawid.model.Utils;
+import fr.dut2.andrawid.model.drawings.DrawableShape;
 import fr.dut2.andrawid.model.shape.ShapeBuilder;
 import fr.dut2.andrawid.model.shape.ShapeContainer;
 import fr.dut2.andrawid.model.shape.ShapeKind;

@@ -1,4 +1,4 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.drawings;
 
 abstract class AbstractDrawableShape implements DrawableShape {
     protected final float[] points;

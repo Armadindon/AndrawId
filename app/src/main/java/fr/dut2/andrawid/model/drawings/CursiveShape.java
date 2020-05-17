@@ -1,12 +1,12 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.drawings;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
+
+import fr.dut2.andrawid.model.shape.ShapeKind;
+import fr.dut2.andrawid.model.shape.ShapeProperties;
 
 public class CursiveShape extends AbstractDrawableShape {
 

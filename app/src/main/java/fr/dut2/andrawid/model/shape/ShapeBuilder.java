@@ -1,4 +1,9 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.shape;
+
+import fr.dut2.andrawid.model.drawings.CursiveShape;
+import fr.dut2.andrawid.model.drawings.DrawableShape;
+import fr.dut2.andrawid.model.drawings.LineShape;
+import fr.dut2.andrawid.model.drawings.RectangleShape;
 
 public class ShapeBuilder {
     private ShapeKind shape;

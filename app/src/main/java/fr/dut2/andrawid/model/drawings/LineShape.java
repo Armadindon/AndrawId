@@ -1,8 +1,10 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.drawings;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
+
+import fr.dut2.andrawid.model.shape.ShapeKind;
+import fr.dut2.andrawid.model.shape.ShapeProperties;
 
 public class LineShape extends AbstractDrawableShape {
 

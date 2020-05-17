@@ -1,15 +1,14 @@
-package fr.dut2.andrawid.model;
+package fr.dut2.andrawid.model.shape;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+
+import fr.dut2.andrawid.model.drawings.DrawableShape;
 
 public class ShapeContainer {
     private static final int CENTER_PRECISION = 50; //pixel autour du centre pour la séléction et la suppresion
@@ -60,7 +59,7 @@ public class ShapeContainer {
 
     public void setSelectShape(DrawableShape selectShape) {
 
-        if (this.selectShape != null) add(this.selectShape, new ShapeProperties(Color.BLACK, container.get(this.selectShape).getOrigin()));
+        if (this.selectShape != null) add(this.selectShape, new ShapeProperties(Color.WHITE, container.get(this.selectShape).getOrigin()));
         this.selectShape = selectShape;
         if (selectShape != null) add(selectShape, new ShapeProperties(Color.BLUE, container.get(this.selectShape).getOrigin()));
 
