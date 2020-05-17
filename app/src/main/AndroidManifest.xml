@@ -13,17 +13,31 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
-        <activity android:name=".MainMenuSelectorActivity">
+        android:theme="@style/Theme.AppCompat">
+        <activity android:name=".activity.PostPictureActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/jpeg"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.MainMenuSelectorActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
-
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".DrawingActivity" />
+        <activity android:name=".activity.DrawingActivity" />
 
+        <!--<provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="fr.upem.andrawid.tempProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>-->
     </application>
 
 

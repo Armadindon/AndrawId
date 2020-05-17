@@ -1,31 +1,51 @@
 package fr.dut2.andrawid.model.share;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.os.Environment;
 
-import org.json.JSONException;
-
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import fr.dut2.andrawid.model.DrawingIO;
-import fr.dut2.andrawid.model.ShapeContainer;
+import fr.dut2.andrawid.model.shape.ShapeContainer;
 
 public class DrawingBitmapExporter implements DrawingIO {
+
+    private final Bitmap.CompressFormat format;
+
+    public DrawingBitmapExporter(Bitmap.CompressFormat format){
+        this.format = format;
+    }
+
+    private Bitmap scaleDown(Bitmap realImage, float maxImageSize,
+                                   boolean filter) {
+        float ratio = Math.min(
+                (float) maxImageSize / realImage.getWidth(),
+                (float) maxImageSize / realImage.getHeight());
+        int width = Math.round((float) ratio * realImage.getWidth());
+        int height = Math.round((float) ratio * realImage.getHeight());
+
+        return Bitmap.createScaledBitmap(realImage, width,
+                height, filter);
+    }
+
     @Override
     public void save(ShapeContainer container, OutputStream output) {
+        try(FileOutputStream outputStream = (FileOutputStream) output) {
 
-        Bitmap bitmap = Bitmap.createBitmap(413, 577, Bitmap.Config.RGB_565);
+            Bitmap bitmap = Bitmap.createBitmap(1080, 1920, Bitmap.Config.ARGB_8888);
 
-        Canvas canvas = new Canvas(bitmap);
+            Canvas canvas = new Canvas(bitmap);
 
-        container.draw(canvas);
+            container.draw(canvas);
 
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, output);
+            scaleDown(bitmap, 1024, true).compress(this.format, 100, outputStream);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

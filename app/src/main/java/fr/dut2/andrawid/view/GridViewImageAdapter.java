@@ -1,15 +1,13 @@
 package fr.dut2.andrawid.view;
 
 import android.app.Activity;
-import android.graphics.drawable.shapes.Shape;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import fr.dut2.andrawid.model.ShapeKind;
+import fr.dut2.andrawid.model.shape.ShapeKind;
 
 public class GridViewImageAdapter extends BaseAdapter {
 

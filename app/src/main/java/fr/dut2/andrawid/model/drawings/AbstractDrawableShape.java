@@ -1,7 +1,7 @@
 package fr.dut2.andrawid.model;
 
 abstract class AbstractDrawableShape implements DrawableShape {
-    float[] points;
+    protected final float[] points;
 
     AbstractDrawableShape(float... points) {
         if (points.length < 4)

@@ -1,4 +1,4 @@
-package fr.dut2.andrawid.model.share;
+package fr.dut2.andrawid.model.drawings;
 
 import android.util.Log;
 
@@ -10,23 +10,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.dut2.andrawid.Utils;
-import fr.dut2.andrawid.model.DrawableShape;
-import fr.dut2.andrawid.model.DrawingIO;
-import fr.dut2.andrawid.model.ShapeBuilder;
-import fr.dut2.andrawid.model.ShapeContainer;
-import fr.dut2.andrawid.model.ShapeKind;
-import fr.dut2.andrawid.model.ShapeProperties;
+import fr.dut2.andrawid.model.Utils;
+import fr.dut2.andrawid.model.shape.ShapeBuilder;
+import fr.dut2.andrawid.model.shape.ShapeContainer;
+import fr.dut2.andrawid.model.shape.ShapeKind;
+import fr.dut2.andrawid.model.shape.ShapeProperties;
+import fr.dut2.andrawid.model.share.DrawingIO;
 
 public class ExportDrawings implements DrawingIO {
     @Override

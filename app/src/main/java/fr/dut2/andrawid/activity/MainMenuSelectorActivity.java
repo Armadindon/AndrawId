@@ -1,4 +1,4 @@
-package fr.dut2.andrawid;
+package fr.dut2.andrawid.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,13 +17,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
+
+import fr.dut2.andrawid.R;
+import fr.dut2.andrawid.activity.DrawingActivity;
 
 public class MainMenuSelectorActivity extends AppCompatActivity {
 
@@ -42,7 +41,6 @@ public class MainMenuSelectorActivity extends AppCompatActivity {
         File appPath = new File(docPath, "andrawid");
         // the directory appPath may not exist yet, we can create it
         appPath.mkdir();
-
 
 
         if (appPath.listFiles() != null) {
@@ -82,7 +80,6 @@ public class MainMenuSelectorActivity extends AppCompatActivity {
                 return;
             }
 
-            System.out.println();
             Intent nextActivity = new Intent(this, DrawingActivity.class);
             nextActivity.putExtra("file", new File(appPath, fileName.getText().toString() + ".json").getPath());
             startActivity(nextActivity);

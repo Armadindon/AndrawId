@@ -1,4 +1,4 @@
-package fr.dut2.andrawid;
+package fr.dut2.andrawid.model;
 
 public class Utils {
 

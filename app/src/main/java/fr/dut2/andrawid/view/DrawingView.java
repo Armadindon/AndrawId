@@ -15,12 +15,12 @@ import androidx.annotation.RequiresApi;
 
 import java.util.Arrays;
 
-import fr.dut2.andrawid.model.DrawableShape;
-import fr.dut2.andrawid.model.ShapeBuilder;
-import fr.dut2.andrawid.model.ShapeContainer;
-import fr.dut2.andrawid.model.ShapeContainerChangeListener;
-import fr.dut2.andrawid.model.ShapeKind;
-import fr.dut2.andrawid.model.ShapeProperties;
+import fr.dut2.andrawid.model.drawings.DrawableShape;
+import fr.dut2.andrawid.model.shape.ShapeBuilder;
+import fr.dut2.andrawid.model.shape.ShapeContainer;
+import fr.dut2.andrawid.model.shape.ShapeContainerChangeListener;
+import fr.dut2.andrawid.model.shape.ShapeKind;
+import fr.dut2.andrawid.model.shape.ShapeProperties;
 
 public class DrawingView extends View {
 
@@ -154,7 +154,7 @@ public class DrawingView extends View {
 
                 DrawableShape tempShape = model.getSelectShape();
                 model.setSelectShape(null);
-                model.add(tempShape,new ShapeProperties(Color.BLACK,event.getX(),event.getY()));
+                model.add(tempShape,new ShapeProperties(Color.WHITE,event.getX(),event.getY()));
                 invalidate();//On redéssine
             }
         }
