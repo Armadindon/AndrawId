@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -86,9 +87,12 @@ public class PostPictureActivity extends AppCompatActivity {
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "image/jpeg");
                 OutputStream os = conn.getOutputStream();
+                int total = 0;
 
                 byte[] buffer = new byte[1024];
                 for (int r = is.read(buffer); r != -1; r = is.read(buffer)) {
+                    total += r;
+                    ((ProgressBar)findViewById(R.id.progressBar)).setProgress(total/fileLength*100);
                     os.write(buffer, 0, r);
                     try {
                         Thread.sleep(1);
